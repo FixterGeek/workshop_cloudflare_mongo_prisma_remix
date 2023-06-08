@@ -2,9 +2,9 @@ declare global {
   const GOOGLE_SECRET: string;
   const GOOGLE_CLIENT_ID: string;
   const ENV: string;
+  const PROD_REDIRECT_URL: string;
 }
 
-const prodURL = "https://prisma-remix-demo.blissmo.workers.dev/login";
 const devURL = "http://localhost:8787/login";
 const scope =
   "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
@@ -34,7 +34,7 @@ export const getAccessToken = async (
       client_secret: GOOGLE_SECRET,
       grant_type: "authorization_code",
       client_id: GOOGLE_CLIENT_ID,
-      redirect_uri: ENV === "development" ? devURL : prodURL,
+      redirect_uri: ENV === "development" ? devURL : PROD_REDIRECT_URL,
       scope,
     });
   return fetch(url, {
@@ -53,7 +53,7 @@ export function redirectToGoogle<Redirect extends (arg0: string) => Response>(
   }
   const obj = {
     client_id: GOOGLE_CLIENT_ID,
-    redirect_uri: ENV === "development" ? devURL : prodURL,
+    redirect_uri: ENV === "development" ? devURL : PROD_REDIRECT_URL,
     response_type: "code",
     scope,
   };
