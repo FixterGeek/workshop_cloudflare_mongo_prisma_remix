@@ -1,4 +1,4 @@
-name = "remix-cloudflare-workers"
+name = "prisma-remix-demo"
 
 workers_dev = true
 main = "./build/index.js"
@@ -15,4 +15,7 @@ compatibility_flags = ["streams_enable_constructors"]
 [vars]
 DATABASE_URL="mongodb+srv://discor:Fkfa0phCTye484mp@cluster0.ctjwaaq.mongodb.net/yutu?retryWrites=true&w=majority"
 PRISMA_PROXY="prisma://aws-us-east-1.prisma-data.com/?api_key=NYR9YiqbTP_GZcSYyoye3zomLK1gSiqDIk73eV_9bsd0p1wgljUzYpJGxxHVLtx4"
+GOOGLE_SECRET="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"
+GOOGLE_CLIENT_ID="325591888601-0442375o1nppq0ubs2thcmus7fpd4nsh.apps.googleusercontent.com"
+ENV="development"
 

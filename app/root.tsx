@@ -8,9 +8,23 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import href from "~/styles/style.css";
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  ...(cssBundleHref
+    ? [
+        { rel: "stylesheet", href: cssBundleHref },
+        {
+          rel: "stylesheet",
+          href,
+        },
+      ]
+    : [
+        {
+          rel: "stylesheet",
+          href,
+        },
+      ]),
 ];
 
 export default function App() {
