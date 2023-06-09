@@ -1,3 +1,4 @@
+// The use of edge client is very important working on Cloudflare! <================== 🔥
 import { PrismaClient } from "@prisma/client/edge";
 
 let db: PrismaClient;

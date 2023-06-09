@@ -13,6 +13,7 @@ import {
 } from "~/utils/google-login";
 import { commitSession, getSession } from "~/utils/sessions";
 import { ifUserRedirect } from "~/utils/user";
+import { userWithoutId } from "~/utils/zod";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -24,7 +25,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  await ifUserRedirect(request);
+  // await ifUserRedirect(request); // not a very good idea to bounce redirections
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
   if (code) {
@@ -37,6 +38,10 @@ export const loader = async ({ request }: LoaderArgs) => {
       picture: extra.picture,
       access_token: extra.access_token,
     };
+    // validate user data
+    const validated = userWithoutId.safeParse(body);
+    if (!validated.success) return null; // what should we do when google data is insufficient?
+    console.log("Saving");
     const user = await db.user.upsert({
       where: {
         email: extra.email,

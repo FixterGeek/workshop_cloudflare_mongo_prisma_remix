@@ -21,6 +21,7 @@ export const meta: V2_MetaFunction = () => {
   ];
 };
 
+/** Action */
 export const action: ActionFunction = async ({ request }) => {
   const user = await getUserOrRedirect(request);
   const formData = await request.formData();
@@ -39,6 +40,7 @@ export const action: ActionFunction = async ({ request }) => {
   throw redirect("/");
 };
 
+/** Loader */
 type LoaderData = {
   comments: CommentType[];
   user: UserType;
@@ -64,6 +66,7 @@ export default function Index() {
   const navigation = useNavigation();
   // this is the real end to end Type saety
   const { comments, user } = useLoaderData<LoaderData>();
+  // const { comments, user } = { comments: [], user: {} };
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const toggleTheme = () => {

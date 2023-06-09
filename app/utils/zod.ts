@@ -20,7 +20,7 @@ export const commentSchema = z.object({
 export type CommentType = z.infer<typeof commentSchema>;
 
 export const userSchema = z.object({
-  id: z.string().optional(),
+  id: z.string(),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
   comments: z.array(commentSchema).optional(),
@@ -32,4 +32,8 @@ export const userSchema = z.object({
 
   email: z.string().email(),
 });
+
+export const userWithoutId = userSchema.omit({ id: true });
+
 export type UserType = z.infer<typeof userSchema>;
+export type UserWithoutIdType = z.infer<typeof userWithoutId>;
